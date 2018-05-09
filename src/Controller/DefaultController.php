@@ -1,19 +1,25 @@
 <?php
 
+
+
 namespace App\Controller;
 
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Routing\Annotation\Route;
 
-class DefaultController extends Controller
-{
+/**
+ * Description of DefaultController
+ *
+ * @author linux
+ */
+class DefaultController extends Controller{
+    
     /**
-     * @Route("/default", name="default")
+     * @Route("/",name="homeaction")
      */
-    public function index()
-    {
-        return $this->render('default/index.html.twig', [
-            'controller_name' => 'DefaultController',
-        ]);
+    public function indexAction($name='demo'){
+        
+        return $this->render('default/index.html.twig',[
+            'name'=> $name]);
     }
 }
