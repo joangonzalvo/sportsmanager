@@ -1,14 +1,72 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/css/slider.css') }}"/>
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+        <!-- Slider -->
+        <div id="slider"> 
+        <div class="slides">
 
-<div class="example-wrapper">
-    <h1>Hello {{ name }}! ✅</h1>
+        <!-- First slide --> 
+        <div class="slider">
+        <div class="legend"></div> 
+        <div class="content"> 
+        <div class="content-txt"> 
+        <h1> Register now! </h1> 
+        <h2> Register in order to acces all the app! </h2> 
+        </div> 
+        </div> 
+        <div class="images"> 
+        <img src="{{ asset('assets/images/image4.jpg') }}"> 
+        </div> 
+        </div>
+        
+        <!-- Second slide --> 
+        <div class="slider">
+        <div class="legend"></div> 
+        <div class="content"> 
+        <div class="content-txt"> 
+        <h1> Teams </h1> 
+        <h2> Join a team now or create a new one to participate </h2> 
+        </div> 
+        </div> 
+        <div class="images"> 
+        <img src="{{ asset('assets/images/image3.jpg') }}"> 
+        </div> 
+        </div> 
 
-    
-</div>
+        <!-- Third slide --> 
+        <div class="slider">
+        <div class="legend"></div> 
+        <div class="content"> 
+        <div class="content-txt"> 
+        <h1> Compete, win! </h1> 
+        <h2> Your team can join all the competitions available, join and win! </h2> 
+        </div> 
+        </div> 
+        <div class="images"> 
+        <img src="{{ asset('assets/images/image2.jpg') }}"> 
+        </div> 
+        </div> 
+
+        <!-- Fourth slide --> 
+        <div class="slider">
+        <div class="legend"></div> 
+        <div class="content"> 
+        <div class="content-txt"> 
+        <h1> League & Tournament simulator </h1> 
+        <h2> Simulate leagues and tournaments with our app </h2> 
+        </div> 
+        </div> 
+        <div class="images"> 
+        <img src="{{ asset('assets/images/image1.jpg') }}"> 
+        </div> 
+        </div> 
+        
+
+        </div> 
+        </div>
+
 {% endblock %}
