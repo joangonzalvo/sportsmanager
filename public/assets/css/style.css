@@ -62,7 +62,7 @@ header{
     font-size: 17px; 
     border: none;
     outline: none;
-    color: white;
+    color: #f5f5f5;
     padding: 14px 16px;
     background-color: inherit;
     font-family: inherit;
@@ -92,7 +92,7 @@ header{
 /* Add a dark background on topnav links and the dropdown button on hover */
 .topnav a:hover, .dropdown:hover .dropbtn {
     background-color: #555;
-    color: white;
+    color: #f5f5f5;
 }
 
 /* Add a grey background to dropdown links on hover */
@@ -139,3 +139,9 @@ header{
     float: left;
   }
 }
+/*-------------------------------------------------------------------------MID BODY*/
+.body-container{
+    background-color: #f5f5f5;
+    margin-top: 0px;
+}
+/*------------------------------------------------SLIDER*/
