@@ -59,6 +59,9 @@ class User implements UserInterface
     function setTeam($team) {
         $this->team = $team;
     }
+    public function getTeam_id(){
+    return $this->team;
+    }
     
         
     public function __construct(){

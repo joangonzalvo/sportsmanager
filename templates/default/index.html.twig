@@ -7,6 +7,7 @@
 {% block body %}
     {% if app.user %}
         {%if app.user.teamrole == "none" %}
+            <!-- Shows the user the team options -->
         <div class="teamaction">
             <form action="{{path("homeaction")}}">
                 <div class="teamjoin">
@@ -24,9 +25,23 @@
                 </div>
             </form>
         </div>
+        {%else%}
+            <!-- User has team, shows team data -->
+            {% for team in teams %}
+                {% if team == app.user.team_id %}
+                    <div class="teamdata">
+                        <div class="teamdatatitle"><h2>{{ team.teamname }}</h2></div>
+                        <div class="teamdivlogo"><p><img class="teamlogo" src="{{ asset('uploads/pictures/' ~ team.logo) }}"></p></div>
+                        <div class="teamdatatitle"><h2>Team info</h2></div>
+                        <div class="teaminfo">
+                            <h3></h3><p>s</p>
+                        </div>
+                    </div>
+                {%endif%}
+            {%endfor%}
         {%endif%}
     {%else%}
-        <!-- Slider -->
+        <!-- Slider for not loged users -->
         <div id="slider"> 
             <div class="slides">
 
