@@ -34,7 +34,80 @@
                         <div class="teamdivlogo"><p><img class="teamlogo" src="{{ asset('uploads/pictures/' ~ team.logo) }}"></p></div>
                         <div class="teamdatatitle"><h2>Team info</h2></div>
                         <div class="teaminfo">
-                            <h3></h3><p>s</p>
+                            <h3>Team name: <i>{{ team.teamname }}</i></h3>
+                            <h3>Owner: <i>
+                                    {%for user in users%}
+                                        {% if team == user.team_id %}
+                                            {% if user.teamrole == "Team_Owner" %}
+                                                {{user.username}}
+                                            {%endif%}
+                                        {%endif%}
+                                    {%endfor%}
+                            </i></h3>
+                            <h3>Contact: <i>
+                                    {%for user in users%}
+                                        {% if team == user.team_id %}
+                                            {% if user.teamrole == "Team_Owner" %}
+                                                {{user.email}}
+                                            {%endif%}
+                                        {%endif%}
+                                    {%endfor%}
+                            </i></h3>
+                            <h3>League titles: <i>{{ team.leaguetitles }}</i></h3>
+                            <h3>Other titles: <i>{{ team.othertitles }}</i></h3>
+                        </div>
+                        <div class="teamdatatitle"><h2>Team members</h2></div>
+                        <div class="teammembers">
+                            <table>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Team role</th>
+                                </tr>
+                                {%for user in users%}
+                                    {% if team == user.team_id %}
+                                       {% if user.teamrole == "Team_Owner" %}
+                                              <tr>
+                                                <td>{{user.username}}</td>
+                                                <td>Owner</td>
+                                              </tr>
+                                       {%endif%}
+                                    {%endif%}
+                                {%endfor%}
+                                {%for user in users%}
+                                    {% if team == user.team_id %}
+                                       {% if user.teamrole == "Team_Admin" %}
+                                              <tr>
+                                                <td>{{user.username}}</td>
+                                                <td>Admin</td>
+                                              </tr>                                             
+                                       {%endif%}
+                                    {%endif%}
+                                {%endfor%}
+                                {%for user in users%}
+                                    {% if team == user.team_id %}
+                                       {% if user.teamrole == "Team_Member" %}
+                                               <tr>
+                                                <td>{{user.username}}</td>
+                                                <td>Member</td>
+                                              </tr>                                            
+                                       {%endif%}
+                                    {%endif%}
+                                {%endfor%}
+                            </table>
+                        </div>
+                        <div class="teamfinal">
+                            <p>
+                                {%if app.user.teamrole == "Team_Owner" %}
+                                    <a href="#">Admin team</a>
+                                {%endif%}
+                                {%if app.user.teamrole == "Team_Admin" %}
+                                    <a href="#">Admin team</a> -
+                                    <a href="#">Leave team</a>
+                                {%endif%}
+                                {%if app.user.teamrole == "Team_Member" %}
+                                    <a href="#">Leave team</a>
+                                {%endif%}
+                            </p>
                         </div>
                     </div>
                 {%endif%}

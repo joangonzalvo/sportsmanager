@@ -255,11 +255,56 @@ form button{
     background-color: red;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    display: block
+    display: block;
 }
 .teamdatatitle h2{
     margin-left: 5px;
 }
 .teamdivlogo{
     text-align: center;
+}
+.teaminfo{
+    color: black;
+    margin-left: 5px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+.teaminfo h3{
+    margin-bottom: 5px;
+}
+.teammembers table{
+        border-collapse: collapse;
+        width: 100%;
+}
+
+.teammembers th, td {
+    padding: 8px;
+    text-align: left;
+}
+.teammembers th{
+    background-color: black;
+    color: white;
+}
+.teammembers td {
+    color: black;
+}
+
+.teammembers tr:hover {background-color:#8b2729;}
+.teammembers tr:hover td{color:white;}
+
+.teamfinal{
+    background-color: red;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    text-align: center;
+    font-size: 25px;
+    height: 35px;
+}
+
+.teamfinal a{
+    color: white;
+    text-decoration: none;
+}
+.teamfinal a:hover{
+    color: black;
 }
