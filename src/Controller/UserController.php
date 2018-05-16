@@ -53,5 +53,23 @@ class UserController extends Controller
          
     }
     
+    /**
+     * @Route("/login",name="login")
+     */
+    public function login(Request $request,AuthenticationUtils $authUtils){
+        $error=$authUtils->getLastAuthenticationError();
+        //last Username
+        $lastUsername=$authUtils->getLastUsername();
+        
+        return $this->render('user/login.html.twig',[
+            'error'=>$error,
+            'last_username'=>$lastUsername
+        ]);
+    }
+    
+    public function logout(){
+        $this->redirectToRoute('logout');
+    }
+    
     
 }//ENDCONTROLLER

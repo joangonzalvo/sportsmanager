@@ -12,9 +12,12 @@
             <a href="{{path("homeaction")}}"><div class="my-logo"></div></a>
         </header>
         <nav class="topnav" id="myTopnav">
-            <a href="{{path("register")}}">Register</a>
-            <a href="#contact">Sign in</a>
-            
+            {% if app.user %}
+                <a href="#">Loged</a>
+            {%else%}
+                <a href="{{path("register")}}">Register</a>
+                <a href="{{path("login")}}">Sign in</a>
+            {%endif%}
             <!-- Dropdown 
             <div class="dropdown">
               <button class="dropbtn">Sign in/up 

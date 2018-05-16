@@ -1,1 +1,7 @@
-
+login:
+    path: /login
+    controller: App\Controller\UserController::login
+    
+logout:
+    path: /logout
+    controller: App\Controller\UserController::logout
