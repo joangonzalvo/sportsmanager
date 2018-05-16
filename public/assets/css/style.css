@@ -166,3 +166,71 @@ form label{
 form button{
     margin-top: 5px;
 }
+/*---------------------------------------------------------------------TEAM*/
+.teamaction{
+    display: flex;
+    align-items: stretch;
+    flex-flow: row wrap;
+    text-align: center;
+    justify-content: space-around;
+    margin-top: 2px;
+    margin-bottom: 4px;
+    
+}
+.teamaction button{
+    width: 200px;
+    height: 50px;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+}
+.teamnew{
+    width: 362px;
+    height: 200px;
+    order: 2;
+    margin-left: 2px;
+    border-style: inset;
+    border-color: red;
+    background-color: #eaeaea;
+}
+.teamjoin{
+    width: 362px;
+    height: 200px;
+    order: 1;
+    margin-right: 2px;
+    border-style: inset;
+    background-color: #eaeaea;
+}
+.teamnew p{
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+.teamjoin p{
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 2px;
+    margin-bottom: 2px;  
+}
+.teamjoin button{
+    background-color: #cccccc;
+}
+.teamnew button{
+    background-color: #ff8080;
+}
+@media screen and (max-width: 750px) {
+.teamnew{
+    margin-left: 0px;
+    margin-top: 4px;
+}
+.teamjoin{
+    margin-right: 0px;
+}
+    
+    
+}
+.small-notes{
+    font-style: italic;
+    font-size: 9px;
+}

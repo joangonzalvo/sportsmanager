@@ -13,7 +13,7 @@
         </header>
         <nav class="topnav" id="myTopnav">
             {% if app.user %}
-                <a href="#">Loged</a>
+                <a href="{{path("logout")}}">Logout</a>
             {%else%}
                 <a href="{{path("register")}}">Register</a>
                 <a href="{{path("login")}}">Sign in</a>

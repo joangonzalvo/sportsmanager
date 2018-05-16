@@ -5,68 +5,83 @@
 {% endblock %}
 
 {% block body %}
+    {% if app.user %}
+        {%if app.user.teamrole == "none" %}
+        <div class="teamaction">
+            <form action="{{path("homeaction")}}">
+                <div class="teamjoin">
+                    <h2>Join a team now!</h2>
+                    <p>Join a team and help them win. You will get acces to exclusive features only for team members!</p>
+                    <button type="submit" class="btn btn-success">Join team</button>
+                </div>
+            </form>
+            <form action="{{path("createteam")}}">
+                <div class="teamnew">
+                    <h2>Create a new team!</h2>
+                    <p>Make a new team, lead it to the leagues you wish to participate and manage it at your way.</p>
+                    <button type="submit" class="btn btn-success">New team</button>
+                    <p class="small-notes">To create a new team you will have to make a single payment</p>
+                </div>
+            </form>
+        </div>
+        {%endif%}
+    {%else%}
         <!-- Slider -->
         <div id="slider"> 
-        <div class="slides">
+            <div class="slides">
 
-        <!-- First slide --> 
-        <div class="slider">
-        <div class="legend"></div> 
-        <div class="content"> 
-        <div class="content-txt"> 
-        <h1> Register now! </h1> 
-        <h2> Register in order to acces all the app! </h2> 
-        </div> 
-        </div> 
-        <div class="images"> 
-        <img src="{{ asset('assets/images/image4.jpg') }}"> 
-        </div> 
+                <div class="slider">
+                    <div class="legend"></div> 
+                        <div class="content"> 
+                        <div class="content-txt"> 
+                        <h1> Register now! </h1> 
+                        <h2> Register in order to acces all the app! </h2> 
+                        </div> 
+                        </div> 
+                        <div class="images"> 
+                        <img src="{{ asset('assets/images/image4.jpg') }}"> 
+                    </div> 
+                </div>
+
+                <div class="slider">
+                    <div class="legend"></div> 
+                        <div class="content"> 
+                        <div class="content-txt"> 
+                        <h1> Teams </h1> 
+                        <h2> Join a team now or create a new one to participate </h2> 
+                        </div> 
+                        </div> 
+                        <div class="images"> 
+                        <img src="{{ asset('assets/images/image3.jpg') }}"> 
+                    </div> 
+                </div> 
+
+                <div class="slider">
+                    <div class="legend"></div> 
+                        <div class="content"> 
+                        <div class="content-txt"> 
+                        <h1> Compete, win! </h1> 
+                        <h2> Your team can join all the competitions available, join and win! </h2> 
+                        </div> 
+                        </div> 
+                        <div class="images"> 
+                        <img src="{{ asset('assets/images/image2.jpg') }}"> 
+                    </div> 
+                </div> 
+
+                <div class="slider">
+                    <div class="legend"></div> 
+                        <div class="content"> 
+                        <div class="content-txt"> 
+                        <h1> League & Tournament simulator </h1> 
+                        <h2> Simulate leagues and tournaments with our app </h2> 
+                        </div> 
+                        </div> 
+                        <div class="images"> 
+                        <img src="{{ asset('assets/images/image1.jpg') }}"> 
+                    </div> 
+                </div> 
+            </div> 
         </div>
-        
-        <!-- Second slide --> 
-        <div class="slider">
-        <div class="legend"></div> 
-        <div class="content"> 
-        <div class="content-txt"> 
-        <h1> Teams </h1> 
-        <h2> Join a team now or create a new one to participate </h2> 
-        </div> 
-        </div> 
-        <div class="images"> 
-        <img src="{{ asset('assets/images/image3.jpg') }}"> 
-        </div> 
-        </div> 
-
-        <!-- Third slide --> 
-        <div class="slider">
-        <div class="legend"></div> 
-        <div class="content"> 
-        <div class="content-txt"> 
-        <h1> Compete, win! </h1> 
-        <h2> Your team can join all the competitions available, join and win! </h2> 
-        </div> 
-        </div> 
-        <div class="images"> 
-        <img src="{{ asset('assets/images/image2.jpg') }}"> 
-        </div> 
-        </div> 
-
-        <!-- Fourth slide --> 
-        <div class="slider">
-        <div class="legend"></div> 
-        <div class="content"> 
-        <div class="content-txt"> 
-        <h1> League & Tournament simulator </h1> 
-        <h2> Simulate leagues and tournaments with our app </h2> 
-        </div> 
-        </div> 
-        <div class="images"> 
-        <img src="{{ asset('assets/images/image1.jpg') }}"> 
-        </div> 
-        </div> 
-        
-
-        </div> 
-        </div>
-
+    {% endif %}  
 {% endblock %}
