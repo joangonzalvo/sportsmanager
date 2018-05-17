@@ -9,7 +9,7 @@
         {%if app.user.teamrole == "none" %}
             <!-- Shows the user the team options -->
         <div class="teamaction">
-            <form action="{{path("homeaction")}}">
+            <form action="{{path("jointeam")}}">
                 <div class="teamjoin">
                     <h2>Join a team now!</h2>
                     <p>Join a team and help them win. You will get acces to exclusive features only for team members!</p>
@@ -55,6 +55,7 @@
                             </i></h3>
                             <h3>League titles: <i>{{ team.leaguetitles }}</i></h3>
                             <h3>Other titles: <i>{{ team.othertitles }}</i></h3>
+                            <h3>Team value: <i>{{ team.teamvalue }}</i></h3>
                         </div>
                         <div class="teamdatatitle"><h2>Team members</h2></div>
                         <div class="teammembers">

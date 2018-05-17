@@ -8,14 +8,45 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Team;
 use App\Entity\User;
 use App\Form\TeamType;
+use App\Form\JoinType;
 
 class TeamController extends Controller
 {
     /**
      * @Route("/jointeam", name="jointeam")
      */
-    public function joinTeam()
+    public function joinTeam(Request $request)
     {
+        $team = new Team();
+        
+        $form = $this->createForm(JoinType::class, $team);
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+           $team=$form->getData();
+           $thiskey=$team->getTeamkey();
+           
+           $repository = $this->getDoctrine()->getRepository('App:Team');
+           $thisTeam = $repository->findOneBy(['teamkey' => $thiskey]);
+           if (!$thisTeam) {
+                throw $this->createNotFoundException(
+                    'No team found for key '.$thiskey
+                );
+            }else{
+                $user=$this->getUser();
+                $user->setTeam($thisTeam);
+                $user->setTeamRole("Team_Member");
+                $bm = $this->getDoctrine()->getManager();
+                $bm->persist($user);
+                $bm->flush();
+
+            }
+            return $this->redirectToRoute('homeaction');
+       }
+       //rendering form
+        return $this->render('team/jointeam.html.twig', array(
+            'form' => $form->createView(),
+        ));
         
     }
     /**
