@@ -316,6 +316,7 @@ form button{
 .classiftable{
     width: 100%;
     overflow-x: auto;
+    display: block;
 }
 .classiftable table{
     border-collapse: collapse;
@@ -333,4 +334,28 @@ tr:nth-child(even){
 .classiftable img{
     width: 35px;
     height: 35px;
+}
+.classAdminoptions{
+    margin-top: 40px;
+    margin-bottom: 20px;
+    display: flex;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    justify-content: space-around;
+    
+    
+}
+.classAdminoptions a:link, a:visited {
+    background-color: #f44336;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+
+.classAdminoptions a:hover, a:active{
+    background-color: red;
 }

@@ -21,7 +21,7 @@
                     </button>
                     <div class="dropdown-content">
                        {%for league in leagues %}
-                           <a href="league/{{league.id}}">{{league.name}}</a>
+                           <a href="/league/{{league.id}}">{{league.name}}</a>
                        {%endfor%}
                       
                       {% if app.user.role == "ROLE_ADMIN" %}

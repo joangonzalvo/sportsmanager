@@ -10,7 +10,7 @@ class LeagueController extends Controller
     /**
      * @Route("/league/{thisleague}",name="thisleague")
      */
-    public function indexAction($thisleague){
+    public function showLeague($thisleague){
         $teams = $this->getDoctrine()->getRepository('App:Team')->findAll();
         $users = $this->getDoctrine()->getRepository('App:User')->findAll();
         $leagues = $this->getDoctrine()->getRepository('App:League')->findAll();
@@ -33,4 +33,5 @@ class LeagueController extends Controller
             'classifications' => $classifications
              ]);
     }
+    
 }
