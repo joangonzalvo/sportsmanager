@@ -20,10 +20,12 @@ class DefaultController extends Controller{
     public function indexAction($name='demo'){
         $teams = $this->getDoctrine()->getRepository('App:Team')->findAll();
         $users = $this->getDoctrine()->getRepository('App:User')->findAll();
+        $leagues = $this->getDoctrine()->getRepository('App:League')->findAll();
         
         return $this->render('default/index.html.twig',[
             'teams' => $teams,
             'users' => $users,
+            'leagues' => $leagues,
             'name'=> $name]);
     }
 }

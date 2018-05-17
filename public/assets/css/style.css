@@ -137,6 +137,10 @@ header{
   }
   .dropdown {
     float: left;
+    display: none;
+  }
+  .displayme{
+      display:block!important;
   }
 }
 /*-------------------------------------------------------------------------MID BODY*/
@@ -307,4 +311,26 @@ form button{
 }
 .teamfinal a:hover{
     color: black;
+}
+/*-----------------------------------------------------------LEAGUE & CLASSIFICATION*/
+.classiftable{
+    width: 100%;
+    overflow-x: auto;
+}
+.classiftable table{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.classiftable th, td{
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){
+    background-color: #f2f2f2
+}
+.classiftable img{
+    width: 35px;
+    height: 35px;
 }

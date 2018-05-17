@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="classiftable">
+        <table>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Points</th>
+                <th>Win</th>
+                <th>Lost</th>
+                <th>Draw</th>
+            </tr>
+            {%for classification in classifications%}
+            <tr>
+                {%for team in teams %}
+                    {% if team == classification.team %}
+                        <td><img class="teamlogo" src="{{ asset('uploads/pictures/' ~ team.logo) }}"></td>
+                        <td>{{team.teamname}}</td>
+                        <td>{{classification.points}}</td>
+                        <td>{{classification.win}}</td>
+                        <td>{{classification.lost}}</td>
+                        <td>{{classification.draw}}</td>
+                    {%endif%}
+                {%endfor%}  
+            </tr>
+            {%endfor%}
+        </table>
+    </div>
+{% endblock %}

@@ -33,6 +33,15 @@ class TeamController extends Controller
                     'No team found for key '.$thiskey
                 );
             }else{
+                //Every time someone joins the team, it will gain one point of value.
+                $myValue=$thisTeam->getTeamValue();
+                $myValue=$myValue+1;
+                $thisTeam->setTeamValue($myValue);
+                
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($thisTeam);
+                $em->flush();
+                
                 $user=$this->getUser();
                 $user->setTeam($thisTeam);
                 $user->setTeamRole("Team_Member");

@@ -42,6 +42,9 @@ class Classification
     function setTeam($team){
         $this->team=$team;
     }
+    function getTeam(){
+        return $this->team;
+    }
     
     /**
      * @ORM\ManyToOne(targetEntity= "App\Entity\League",inversedBy="classifications")
