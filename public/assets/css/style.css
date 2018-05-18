@@ -342,9 +342,11 @@ tr:nth-child(even){
     text-align: center;
     justify-content: center;
     justify-content: space-around;
+    flex-wrap:wrap;
 }
 .classAdminoptions a{
     border-radius: 4px;
+    margin-top: 3px;
 }
 .classAdminoptions a:link, a:visited {
     background-color: #f44336;

@@ -205,5 +205,33 @@ class LeagueController extends Controller
         }
         return $this->showLeague($thisleague);
     }
+    /**
+     * @Route("/league/{thisleague}/complete",name="complete")
+     */
+    public function completetLeague($thisleague){
+        $repository = $this->getDoctrine()->getRepository('App:League');
+        $actualLeague = $repository->findOneBy(['id' => $thisleague]);
+        //GET ALL THE CLASSIFICATIONS OF ALL LEAGUES:
+        $totalclassifications = $this->getDoctrine()->getRepository('App:Classification');
+        //SEARCH FOR THE CLASSIFICATIONS OF THIS LEAGUE ONLY, ORDERED BY POINTS
+        $classifications = $totalclassifications->findBy(
+            ['league' => $actualLeague],
+            ['points' => 'DESC']
+        );
+        $flag=0;
+        foreach ($classifications as $local) {
+            if($flag==0){
+            $winteam=$local->getTeam();
+            $trophies=$winteam->getLeagueTitles()+1;
+            $winteam->setLeagueTitles($trophies);
+            $flag=1;
+            
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($winteam);
+            $em->flush();
+            }
+        }
+        return $this->resetLeague($thisleague);
+    }
     
 }
