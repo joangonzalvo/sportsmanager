@@ -49,26 +49,101 @@ class LeagueController extends Controller
         );
         //echo(count($classifications));
         $comp=0;
-        foreach ($classifications as $key) {
-            $keyid=$key->getId();
+        foreach ($classifications as $local) {
+            $localid=$local->getId();
            foreach ($classifications as $rival) {
                $rivalid=$rival->getId();
-               if($keyid != $rivalid){
+               if($localid != $rivalid){
                    if($rivalid > $comp){
-                       $teamlocal=$key->getTeamId();
+                       $teamlocal=$local->getTeamId();
                        $teamrival=$rival->getTeamId();
-                       if($teamlocal->getTeamValue() > $teamrival->getTeamValue()){
+                       if($teamlocal->getTeamValue() != $teamrival->getTeamValue()){
                            $dif=$teamlocal->getTeamValue()-$teamrival->getTeamValue();
                            $dif=$dif+50;
+                           //If diference is more than 100 will be auto 99 dif, to get a "luck" factor. Can only win if rand number is 100
                            if($dif >= 100){
                                $dif=99;                               
                            }
+                           $simulation=mt_rand(1,100);
+                           //If simulation number is smaller than diference, local team wins. If its the same, its a draw. Else, rival wins.
+                           //Win means 3 points and 1 point of value, draw 1 point, lose is 1 point of value less
+                           
+                           if($simulation <= $dif){
+                               //LOCAL TEAM WINS
+                               $localpoints=$local->getPoints()+3;
+                               $localwins=$local->getWin()+1;
+                               $local->setPoints($localpoints);
+                               $local->setWin($localwins);
+                               //Update data
+                               $em = $this->getDoctrine()->getManager();
+                               $em->persist($local);
+                               $em->flush();
+                               //RIVAL LOSE
+                               $rivallose=$rival->getLost()+1;
+                               $rival->setLost($rivallose);
+                               //Update data
+                               $em->persist($rival);
+                               $em->flush();
+                               //Now update team value
+                               $localvalue=$teamlocal->getTeamValue()+1;
+                               $rivalvalue=$teamrival->getTeamValue()-1;
+                               $teamlocal->setTeamValue($localvalue);
+                               $teamrival->setTeamValue($rivalvalue);
+                               $em->persist($teamlocal);
+                               $em->flush();
+                               $em->persist($teamrival);
+                               $em->flush();
+                               
+                           }elseif($simulation == $dif){
+                               //LOCAL DRAW
+                               $localpoints=$local->getPoints()+1;
+                               $localdraw=$local->getDraw()+1;
+                               $local->setPoints($localpoints);
+                               $local->setDraw($localdraw);
+                               //Update data
+                               $em = $this->getDoctrine()->getManager();
+                               $em->persist($local);
+                               $em->flush();
+                               //RIVAL DRAW
+                               $rivalpoints=$rival->getPoints()+1;
+                               $rivaldraw=$rival->getDraw()+1;
+                               $rival->setPoints($rivalpoints);
+                               $rival->setDraw($rivaldraw);
+                               //Update data
+                               $em->persist($rival);
+                               $em->flush();
+                               //No need of update values
+                               
+                           }else{
+                               //LOCAL LOSE
+                               $locallose=$local->getLost()+1;
+                               $local->setLost($locallose);
+                               //Update data
+                               $em = $this->getDoctrine()->getManager();
+                               $em->persist($local);
+                               $em->flush();
+                               //RIVAL WIN
+                               $rivalwin=$rival->getWin()+1;
+                               $rivalpoints=$rival->getPoints()+1;
+                               $rival->setPoints($rivalpoints);
+                               $rival->setWin($rivalwin);
+                               //Update data
+                               $em->persist($rival);
+                               $em->flush();
+                               //Now update team value
+                               $localvalue=$teamlocal->getTeamValue()-1;
+                               $rivalvalue=$teamrival->getTeamValue()+1;
+                               $teamlocal->setTeamValue($localvalue);
+                               $teamrival->setTeamValue($rivalvalue);
+                               $em->persist($teamlocal);
+                               $em->flush();
+                               $em->persist($teamrival);
+                               $em->flush();
+                               
+                           }
                            
                        }
-                       elseif($teamlocal->getTeamValue() < $teamrival->getTeamValue()){
-
-                       }
-                       else{
+                       else{//TEAM VALUES ARE THE SAME
 
                        }
                    }
