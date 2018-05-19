@@ -356,8 +356,13 @@ tr:nth-child(even){
     text-decoration: none;
     display: inline-block;
 }
-
-
 .classAdminoptions a:hover, a:active{
     background-color: red;
+}
+.addteam{
+    display: block;
+text-align: center;
+    margin-top: 5px;
+    color:black;
+    font-style: italic;
 }

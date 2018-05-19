@@ -58,7 +58,7 @@ class Classification
         return $this->league;
     }
     function setLeague($league){
-        $this->post=$league;
+        $this->league=$league;
     }
     function getId() {
         return $this->id;

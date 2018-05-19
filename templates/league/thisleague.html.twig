@@ -14,6 +14,7 @@
                 <th>Lost</th>
                 <th>Draw</th>
             </tr>
+            {% set myteam = 0 %}
             {%for classification in classifications%}
             <tr>
                 {%for team in teams %}
@@ -24,6 +25,9 @@
                         <td>{{classification.win}}</td>
                         <td>{{classification.lost}}</td>
                         <td>{{classification.draw}}</td>
+                        {%if app.user.team_id == team %}
+                                {% set myteam = 1 %}
+                        {%endif%}
                     {%endif%}
                 {%endfor%}  
             </tr>
@@ -35,6 +39,19 @@
             <a href="/league/{{actualLeague.id}}/simulate">Simulate round</a>
             <a href="/league/{{actualLeague.id}}/complete">Complete league</a>
         </div>
+        {%endif%}
+        {% set thisTeam = 0 %}
+        {%if app.user.teamrole == "Team_Owner" %}
+            {%if myteam == 0 %}                     
+            {%for team in teams %}
+                    {%if app.user.team_id == team %}
+                            {% set thisTeam = team.id %}
+                    {%endif%}
+            {%endfor%}  
+                <div class="addteam">
+                    <p>Add your team to this league</p><a href="/league/{{actualLeague.id}}/{{thisTeam}}/join"><img src="{{ asset('assets/images/plus.png') }}"></a>
+                </div>
+            {%endif%}
         {%endif%}
     </div>
 {% endblock %}

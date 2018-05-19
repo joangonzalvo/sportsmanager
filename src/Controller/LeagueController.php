@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use App\Entity\Classification;
 
 class LeagueController extends Controller
 {
@@ -232,6 +233,30 @@ class LeagueController extends Controller
             }
         }
         return $this->resetLeague($thisleague);
+    }
+    /**
+     * @Route("/league/{thisleague}/{thisteam}/join",name="join")
+     */
+    public function joinLeague($thisleague, $thisteam){
+        $teams = $this->getDoctrine()->getRepository('App:Team');
+        $team = $teams->findOneBy(['id' => $thisteam]);
+        $repository = $this->getDoctrine()->getRepository('App:League');
+        $actualLeague = $repository->findOneBy(['id' => $thisleague]);
+        
+        $class = new Classification();
+        
+        $class->setLeague($actualLeague);
+        $class->setTeam($team);
+        $class->setDraw(0);
+        $class->setLost(0);
+        $class->setWin(0);
+        $class->setPoints(0);
+        
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($class);
+        $em->flush();
+        
+        return $this->showLeague($thisleague);
     }
     
 }
