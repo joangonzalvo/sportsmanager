@@ -6,7 +6,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Team;
-use App\Entity\User;
 use App\Form\TeamType;
 use App\Form\JoinType;
 
@@ -17,6 +16,11 @@ class TeamController extends Controller
      */
     public function joinTeam(Request $request)
     {
+        $teams = $this->getDoctrine()->getRepository('App:Team')->findAll();
+        $users = $this->getDoctrine()->getRepository('App:User')->findAll();
+        $leagues = $this->getDoctrine()->getRepository('App:League')->findAll();
+        $name='demo';
+        
         $team = new Team();
         
         $form = $this->createForm(JoinType::class, $team);
@@ -55,6 +59,10 @@ class TeamController extends Controller
        //rendering form
         return $this->render('team/jointeam.html.twig', array(
             'form' => $form->createView(),
+            'teams' => $teams,
+            'users' => $users,
+            'leagues' => $leagues,
+            'name'=> $name
         ));
         
     }
@@ -73,6 +81,11 @@ class TeamController extends Controller
      */
     public function createTeam(Request $request)
     {
+        $teams = $this->getDoctrine()->getRepository('App:Team')->findAll();
+        $users = $this->getDoctrine()->getRepository('App:User')->findAll();
+        $leagues = $this->getDoctrine()->getRepository('App:League')->findAll();
+        $name='demo';
+        
         $team = new Team();
         $team->setLeagueTitles(0);
         $team->setOtherTitles(0);
@@ -118,6 +131,10 @@ class TeamController extends Controller
        //rendering form
         return $this->render('team/newteam.html.twig', array(
             'form' => $form->createView(),
+            'teams' => $teams,
+            'users' => $users,
+            'leagues' => $leagues,
+            'name'=> $name
         ));
     }
 }

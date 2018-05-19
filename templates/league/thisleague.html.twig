@@ -33,13 +33,25 @@
             </tr>
             {%endfor%}
         </table>
-        {%if app.user.role == "ROLE_ADMIN"%}
         <div class="classAdminoptions">
+        {%if app.user.role == "ROLE_ADMIN"%}
+        
             <a href="/league/{{actualLeague.id}}/reset">Reset league</a>
             <a href="/league/{{actualLeague.id}}/simulate">Simulate round</a>
             <a href="/league/{{actualLeague.id}}/complete">Complete league</a>
-        </div>
         {%endif%}
+        {% set thisTeam = 0 %}
+            {%if app.user.teamrole == "Team_Owner" %}
+                {%if myteam == 1 %}                     
+                {%for team in teams %}
+                        {%if app.user.team_id == team %}
+                                {% set thisTeam = team.id %}
+                        {%endif%}
+                {%endfor%}  
+                        <a href="/league/{{actualLeague.id}}/{{thisTeam}}/leave">Leave league</a>
+                {%endif%}
+            {%endif%}
+        </div>
         {% set thisTeam = 0 %}
         {%if app.user.teamrole == "Team_Owner" %}
             {%if myteam == 0 %}                     

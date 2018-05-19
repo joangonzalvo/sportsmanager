@@ -14,7 +14,7 @@
         <nav class="topnav" id="myTopnav">
             {% if app.user %}
                 <a href="{{path("logout")}}">Logout</a>
-                <a href="#">Profile</a>
+                <a href="/#">Profile</a>
                 <div class="dropdown" id="down">
                     <button class="dropbtn">Leagues
                       <i class="fa fa-caret-down"></i>
@@ -25,11 +25,11 @@
                        {%endfor%}
                       
                       {% if app.user.role == "ROLE_ADMIN" %}
-                          <a href="#">New league</a>
+                          <a href="{{path("newleague")}}">New league</a>
                       {% endif %}
                     </div>
                   </div>
-                <a href="#">Teams</a>
+                <a href="/#">Teams</a>
             {%else%}
                 <a href="{{path("register")}}">Register</a>
                 <a href="{{path("login")}}">Sign in</a>

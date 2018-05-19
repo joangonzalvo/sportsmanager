@@ -4,7 +4,10 @@ namespace App\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Classification;
+use App\Entity\League;
+use App\Form\LeagueType;
 
 class LeagueController extends Controller
 {
@@ -242,21 +245,92 @@ class LeagueController extends Controller
         $team = $teams->findOneBy(['id' => $thisteam]);
         $repository = $this->getDoctrine()->getRepository('App:League');
         $actualLeague = $repository->findOneBy(['id' => $thisleague]);
+        //Security method to not repeat the join to a league classification
+        $repository2 = $this->getDoctrine()->getRepository(Classification::class);
+        $exist = $repository2->findOneBy([
+            'team' => $team,
+            'league' => $actualLeague,
+        ]);
+        if (!$exist) {
+            //If the team has no classification in this league:
+            $class = new Classification();
         
-        $class = new Classification();
+            $class->setLeague($actualLeague);
+            $class->setTeam($team);
+            $class->setDraw(0);
+            $class->setLost(0);
+            $class->setWin(0);
+            $class->setPoints(0);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($class);
+            $em->flush();
         
-        $class->setLeague($actualLeague);
-        $class->setTeam($team);
-        $class->setDraw(0);
-        $class->setLost(0);
-        $class->setWin(0);
-        $class->setPoints(0);
-        
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($class);
-        $em->flush();
+        }
         
         return $this->showLeague($thisleague);
     }
+    /**
+     * @Route("/league/{thisleague}/{thisteam}/leave",name="leave")
+     */
+    public function leaveLeague($thisleague, $thisteam){
+        $teams = $this->getDoctrine()->getRepository('App:Team');
+        $team = $teams->findOneBy(['id' => $thisteam]);
+        $repository = $this->getDoctrine()->getRepository('App:League');
+        $actualLeague = $repository->findOneBy(['id' => $thisleague]);
+        //Security method to not repeat the join to a league classification
+        $repository2 = $this->getDoctrine()->getRepository(Classification::class);
+        $exist = $repository2->findOneBy([
+            'team' => $team,
+            'league' => $actualLeague,
+        ]);
+        if ($exist) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($exist);
+            $entityManager->flush();
+        }
+        
+        return $this->redirectToRoute('homeaction');
+    }
+    /**
+     * @Route("/newleague", name="newleague")
+     */
+    public function newLeague(Request $request)
+    {
+        $teams = $this->getDoctrine()->getRepository('App:Team')->findAll();
+        $users = $this->getDoctrine()->getRepository('App:User')->findAll();
+        $leagues = $this->getDoctrine()->getRepository('App:League')->findAll();
+        $name='demo';
+        
+        $league = new League();
+        $s=date("Y-m-d H:i:s");
+        $date = date_create_from_format('Y-m-d H:i:s', $s);
+        $date->getTimestamp();
+        
+        $league->setDatestart($date);
+        
+        $form = $this->createForm(LeagueType::class, $league);
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+           $league=$form->getData();
+           
+            
+           $em = $this->getDoctrine()->getManager();
+           $em->persist($league);
+           $em->flush();
+           
+           return $this->redirectToRoute('homeaction');
+       }
+       //rendering form
+        return $this->render('league/newleague.html.twig', array(
+            'form' => $form->createView(),
+            'teams' => $teams,
+            'users' => $users,
+            'leagues' => $leagues,
+            'name'=> $name
+            
+        ));
+    }
     
-}
+}//ENDCLASS
