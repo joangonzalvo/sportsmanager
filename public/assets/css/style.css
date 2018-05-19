@@ -191,18 +191,20 @@ form button{
     width: 362px;
     height: 200px;
     order: 2;
-    margin-left: 2px;
+    margin-left: 5px;
     border-style: inset;
     border-color: red;
     background-color: #eaeaea;
+    border-radius: 7px;
 }
 .teamjoin{
     width: 362px;
     height: 200px;
     order: 1;
-    margin-right: 2px;
+    margin-right: 5px;
     border-style: inset;
     background-color: #eaeaea;
+    border-radius: 7px;
 }
 .teamnew p{
     margin-left: 5px;
@@ -218,9 +220,11 @@ form button{
 }
 .teamjoin button{
     background-color: #cccccc;
+    border-radius: 7px;
 }
 .teamnew button{
     background-color: #ff8080;
+    border-radius: 7px;
 }
 @media screen and (max-width: 750px) {
 .teamnew{
@@ -311,6 +315,24 @@ form button{
 .teamfinal a:hover{
     color: black;
 }
+.allteams{
+    align-items: baseline;
+    align-content: flex-start;
+    width: 90%;
+    height: 90%;
+    color: white;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 2px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+.allteams .note{
+    color:black;
+    font-style: italic;
+    text-align: center;
+}
 /*-----------------------------------------------------------LEAGUE & CLASSIFICATION*/
 .classiftable{
     width: 100%;
@@ -378,4 +400,9 @@ text-align: center;
 .leagueLogo .thisotherlogo{
     width: 100px;
     height: 50px;
+}
+/*----------------------------------------------USER*/
+.userdata *{
+    margin: 0px;
+    color: black;
 }

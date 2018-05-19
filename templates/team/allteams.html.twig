@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="allteams">
+    <h2 class="note">If want to join one of this teams, please contact the owner in order to receive the team key.</h2>
+    {% for team in teams %}
+        <div class="thisteamall">
+            <div class="teamdatatitle"><h2>{{ team.teamname }}</h2></div>
+            <div class="teamdivlogo"><p><img class="teamlogo" src="{{ asset('uploads/pictures/' ~ team.logo) }}"></p></div>
+            <div class="teaminfo">
+                <h3>Team name: <i>{{ team.teamname }}</i></h3>
+                <h3>Owner: <i>
+                    {%for user in users%}
+                        {% if team == user.team_id %}
+                            {% if user.teamrole == "Team_Owner" %}
+                                {{user.username}}
+                            {%endif%}
+                         {%endif%}
+                    {%endfor%}
+                </i></h3>
+                <h3>Contact: <i>
+                    {%for user in users%}
+                            {% if team == user.team_id %}
+                                    {% if user.teamrole == "Team_Owner" %}
+                                            {{user.email}}
+                                    {%endif%}
+                            {%endif%}
+                    {%endfor%}
+                </i></h3>
+                <h3>League titles: <i>{{ team.leaguetitles }}</i></h3>
+                 <h3>Other titles: <i>{{ team.othertitles }}</i></h3>
+        </div>
+        {%endfor%}
+        </div>
+    
+{% endblock %}

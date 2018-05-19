@@ -11,6 +11,22 @@ use App\Form\JoinType;
 
 class TeamController extends Controller
 {
+    
+    /**
+     * @Route("/teams",name="teams")
+     */
+    public function allteams($name='demo'){
+        $teams = $this->getDoctrine()->getRepository('App:Team')->findAll();
+        $users = $this->getDoctrine()->getRepository('App:User')->findAll();
+        $leagues = $this->getDoctrine()->getRepository('App:League')->findAll();
+        
+        return $this->render('team/allteams.html.twig',[
+            'teams' => $teams,
+            'users' => $users,
+            'leagues' => $leagues,
+            'name'=> $name]);
+    }
+    
     /**
      * @Route("/jointeam", name="jointeam")
      */

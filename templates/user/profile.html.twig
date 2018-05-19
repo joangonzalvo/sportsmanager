@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {% if app.user %}
+        <div class="teamdata userdata">
+            <div class="teamdatatitle"><h2>User profile</h2></div>
+            {% for team in teams %}
+                {% if team == app.user.team_id %}
+                        <div class="teamdivlogo"><p><img class="teamlogo" src="{{ asset('uploads/pictures/' ~ team.logo) }}"></p></div>
+                {%endif%}
+            {%endfor%}
+            <h3>Username: <i>{{ app.user.username }}</i></h3>
+            <h3>Email: <i>{{ app.user.email }}</i></h3>
+             <div class="teamfinal">
+                <p>
+                  <a href="#">Update</a> -
+                  <a href="#">Delete</a>
+               </p>
+            </div>
+        </div>
+    {%endif%}
+{% endblock %}
