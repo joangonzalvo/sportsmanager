@@ -4,7 +4,34 @@
 {% endblock %}
 
 {% block body %}
+
     <div class="classiftable">
+    <div class="leagueLogo">
+        {%set mytype=0%}
+        {%if actualLeague.type == "football"%}
+            {%set mytype=1%}
+            <img class="thislogo" src="{{ asset('assets/images/futbol.png') }}">
+        {%endif%}
+        {%if actualLeague.type == "soccer"%}
+            {%set mytype=1%}
+            <img class="thislogo" src="{{ asset('assets/images/futbol.png') }}">
+        {%endif%}
+        {%if actualLeague.type == "basketball"%}
+            {%set mytype=1%}
+            <img class="thislogo" src="{{ asset('assets/images/basketball.png') }}">
+        {%endif%}
+        {%if actualLeague.type == "esports"%}
+            {%set mytype=1%}
+            <img class="thislogo" src="{{ asset('assets/images/esports.png') }}">
+        {%endif%}
+        {%if actualLeague.type == "e-sports"%}
+            {%set mytype=1%}
+            <img class="thislogo" src="{{ asset('assets/images/esports.png') }}">
+        {%endif%}
+        {%if mytype == 0%}
+            <img class="thisotherlogo" src="{{ asset('assets/images/other.png') }}">
+        {%endif%}
+    </div>
         <table>
             <tr>
                 <th></th>

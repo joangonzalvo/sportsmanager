@@ -56,6 +56,12 @@
                             <h3>League titles: <i>{{ team.leaguetitles }}</i></h3>
                             <h3>Other titles: <i>{{ team.othertitles }}</i></h3>
                             <h3>Team value: <i>{{ team.teamvalue }}</i></h3>
+                            {%if app.user.teamrole == "Team_Owner"%}
+                                <h3>Team key: <i>{{ team.teamkey }}</i></h3>
+                            {%endif%}
+                            {%if app.user.teamrole == "Team_Admin"%}
+                                <h3>Team key: <i>{{ team.teamkey }}</i></h3>
+                            {%endif%}
                         </div>
                         <div class="teamdatatitle"><h2>Team members</h2></div>
                         <div class="teammembers">
