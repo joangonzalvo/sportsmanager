@@ -139,7 +139,7 @@ class UserController extends Controller
                                     $flag=1;
                                     $thisuser->setTeamRole("Team_Owner");
                                     $entityManager = $this->getDoctrine()->getManager();
-                                    $entityManager->persist($user);
+                                    $entityManager->persist($thisuser);
                                     $entityManager->flush();
                                 }
                             }

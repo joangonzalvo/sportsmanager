@@ -24,7 +24,7 @@ class TeamType extends AbstractType{
                     	'label'=>'Your team logo (PNG,JPEG)'
                 	])
                     ->add('Signup', SubmitType::class,
-                            ['label'=>'Register new team',
+                            ['label'=>'Register team',
                                 'attr'=>[
                                 'class'=>'form-submit btn btn-success'
                         ]]);

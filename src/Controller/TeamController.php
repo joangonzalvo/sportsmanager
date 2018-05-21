@@ -153,4 +153,116 @@ class TeamController extends Controller
             'name'=> $name
         ));
     }
-}
+    /**
+     * @Route("/editteam",name="editteam")
+     */
+    public function editTeam(Request $request)
+    {
+        $leagues = $this->getDoctrine()->getRepository('App:League')->findAll();
+        $teams = $this->getDoctrine()->getRepository('App:Team')->findAll();
+            //this user
+        $user=$this->getUser();
+        foreach($teams as $team) {
+            if($team == $user->getTeamid()){
+                    $thisteam=$team;
+                    }
+                }
+        $team = new Team();
+        //creating the form
+        $form = $this->createForm(TeamType::class, $team);
+        
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+           $team=$form->getData();
+           //LOGO
+            //upload file
+            $file=$team->getLogo();
+            $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
+            // moves the file to the directory where brochures are stored
+            $file->move(
+                    $this->getParameter('pictures_directory'),
+                    $fileName
+            );
+            $team->setLogo($fileName);
+            //Update this team:
+            $thisteam->setTeamname($team->getTeamname());
+            $thisteam->setLogo($team->getLogo());
+            
+           $em = $this->getDoctrine()->getManager();
+           $em->persist($thisteam);
+           $em->flush();
+           
+           return $this->redirectToRoute('homeaction');
+       }
+        //rendering form
+        return $this->render('team/editteam.html.twig', array(
+            'form' => $form->createView(),
+            'leagues' => $leagues
+        ));
+         
+    }
+    /**
+     * @Route("/leaveteam",name="leaveteam")
+     */
+    public function leaveTeam(Request $request){
+       $user=$this->getUser();
+       $edited=0;
+       if($user->getTeamRole()=="Team_Owner"){
+               $flag=0;
+               $teams = $this->getDoctrine()->getRepository('App:Team')->findAll();
+               $users = $this->getDoctrine()->getRepository('App:User')->findAll();
+               foreach ($teams as $team) {
+                    if($team == $user->getTeamid()){
+                        foreach($users as $thisuser){
+                            if($thisuser->getTeamid()==$team && $thisuser->getTeamRole() != "Team_Owner"){
+                                if($flag==0){
+                                    $flag=1;
+                                    $thisuser->setTeamRole("Team_Owner");
+                                    $entityManager = $this->getDoctrine()->getManager();
+                                    $entityManager->persist($user);
+                                    $entityManager->flush();
+                                }
+                            }
+                        }
+                        if($flag==0){//Means there is no more members in the team to get the owner, team will be auto deleted
+                        //First we need to delete the team from all the classifications
+                        $cs = $this->getDoctrine()->getRepository('App:Classification')->findAll();
+                        foreach($cs as $c){
+                            if($c->getTeam()==$team){
+                                $entityManager = $this->getDoctrine()->getManager();
+                                $entityManager->remove($c);
+                                $entityManager->flush();
+                            }
+                        }
+                        //EDIT USER TO LEAVE TEAM
+                        $user->setTeamRole("none");
+                        $user->setTeam(null);
+                        $entityManager2 = $this->getDoctrine()->getManager();
+                        $entityManager2->persist($user);
+                        $entityManager2->flush();
+                        $edited=1;
+                        
+                        //DELETE TEAME BCS THERE ARE NO MORE MEMBERS IN
+                        $entityManager3 = $this->getDoctrine()->getManager();
+                        $entityManager3->remove($team);
+                        $entityManager3->flush();
+                        }
+                    }
+                }
+            }
+            if($edited==0){
+                //EDIT USER TO LEAVE TEAM
+                $user->setTeamRole("none");
+                $user->setTeam(null);
+                $entityManager2 = $this->getDoctrine()->getManager();
+                $entityManager2->persist($user);
+                $entityManager2->flush();
+            }
+        
+       return $this->redirectToRoute('homeaction');
+    }
+    
+    
+    
+}//ENDCONTROLLER
