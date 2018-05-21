@@ -48,7 +48,15 @@
         
         {% endblock %}
             </div>
-        
+            <footer>
+                {% if app.user %}
+                 <div class="classAdminoptions">
+                {%if app.user.role == "ROLE_ADMIN"%}
+                    <a href="{{path("adminpanel")}}" class="adminpanelbutton">Admin Panel</a>
+                {%endif%}
+                </div>
+                {%endif%}
+            </footer>
         {% block javascripts %}
               <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
               <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

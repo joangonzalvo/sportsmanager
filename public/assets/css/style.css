@@ -356,8 +356,8 @@ form button{
     padding: 8px;
 }
 
-tr:nth-child(even){
-    background-color: #f2f2f2
+.classiftable tr:nth-child(even){
+    background-color: #f2f2f2;
 }
 .classiftable img{
     width: 35px;
@@ -412,4 +412,79 @@ text-align: center;
 .userdata *{
     margin: 0px;
     color: black;
+}
+/*--------------------------------------------------------------------------------ADMIN*/
+.adminpanelbutton{
+    background-color: darkgray!important;
+    color: black!important;
+}
+.adminpanelbutton:hover{
+    background-color: gray!important;
+    color:red!important;
+}
+.admindata{
+    align-items: baseline;
+    align-content: flex-start;
+    width: 90%;
+    height: 90%;
+    color: white;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 2px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.admindata *{
+    margin:0;
+}
+.admintitle{
+    background-color: red;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    display: block;
+}
+.admininfo{
+    color: black;
+    margin-left: 5px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+.admininfo a{
+    text-decoration: none;
+    color: red;
+}
+.admininfo a:hover{
+    text-decoration: none;
+    color: darkred;
+}
+.admintable{
+    overflow-x: auto;
+    display: block;
+    width: 100%;
+    margin-left: 10%;
+}
+.admintable table{
+    border-collapse: collapse;
+    width: 90%;
+}
+
+.admintable th, td{
+    text-align: left;
+    padding: 8px;
+}
+
+.admintable tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+.admintable img{
+    width: 35px;
+    height: 35px;
+}
+.admintable a{
+    text-decoration: none;
+    color: red;
+}
+.admintable a:hover{
+    text-decoration: none;
+    color: darkred;
 }

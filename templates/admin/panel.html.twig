@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if app.user %}
+            {% if app.user.role == "ROLE_ADMIN" %}
+              <div class="admindata">
+                  <div class="admintitle"><h2>Admin panel</h2></div>
+                <div class="admininfo"><a href="/adminpanel/users">Show users</a></div>
+                <div class="admininfo"><a href="/adminpanel/teams">Show teams</a></div>
+                <div class="admininfo"><a href="/adminpanel/leagues">Show leagues</a></div>
+              </div>
+         {% endif %}    
+    {% endif %} 
+{% endblock %}
