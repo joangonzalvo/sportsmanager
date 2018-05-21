@@ -262,6 +262,27 @@ class TeamController extends Controller
         
        return $this->redirectToRoute('homeaction');
     }
+    /**
+     * @Route("/team/{thisuser}/exclude",name="exclude")
+     */
+    public function excludeMember($thisuser){
+        $user=$this->getUser();
+        //Only owners can exclude members
+        if($user->getTeamRole()=="Team_Owner"){
+            $repository = $this->getDoctrine()->getRepository('App:User');
+            $usertoexclude = $repository->findOneBy(['id' => $thisuser]);
+            //Security method to be sure that the owner only excludes members of his own team
+            if($usertoexclude->getTeamid()==$user->getTeamid()){
+                $usertoexclude->setTeamRole("none");
+                $usertoexclude->setTeam(null);
+                $entityManager2 = $this->getDoctrine()->getManager();
+                $entityManager2->persist($usertoexclude);
+                $entityManager2->flush();
+            }
+            
+        }
+        return $this->redirectToRoute('homeaction');
+    }
     
     
     

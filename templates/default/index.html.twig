@@ -66,6 +66,9 @@
                                 <tr>
                                     <th>Name</th>
                                     <th>Team role</th>
+                                    {%if app.user.teamrole == "Team_Owner" %}
+                                    <th>Exclude member</th>
+                                    {%endif%}
                                 </tr>
                                 {%for user in users%}
                                     {% if team == user.team_id %}
@@ -73,6 +76,9 @@
                                               <tr>
                                                 <td>{{user.username}}</td>
                                                 <td>Owner</td>
+                                                {%if app.user.teamrole == "Team_Owner" %}
+                                                <td></td>
+                                                {%endif%}
                                               </tr>
                                        {%endif%}
                                     {%endif%}
@@ -83,6 +89,9 @@
                                                <tr>
                                                 <td>{{user.username}}</td>
                                                 <td>Member</td>
+                                                {%if app.user.teamrole == "Team_Owner" %}
+                                                    <td><a href="/team/{{user.id}}/exclude">Exclude</a></td>
+                                                {%endif%}
                                               </tr>                                            
                                        {%endif%}
                                     {%endif%}

@@ -282,6 +282,8 @@ form button{
 .teammembers table{
         border-collapse: collapse;
         width: 100%;
+        font-size: 20px;
+        margin-bottom: 20px;
 }
 
 .teammembers th, td {
@@ -328,10 +330,15 @@ form button{
     margin-bottom: 10px;
     flex-wrap: wrap;
 }
-.allteams .note{
-    color:black;
-    font-style: italic;
-    text-align: center;
+.allteams *{
+    margin: 0;
+}
+.teammembers a{
+    color:red;
+    text-decoration: none;
+}
+.teammembers a:hover{
+    color:white;
 }
 /*-----------------------------------------------------------LEAGUE & CLASSIFICATION*/
 .classiftable{
