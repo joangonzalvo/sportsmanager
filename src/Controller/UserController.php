@@ -120,11 +120,13 @@ class UserController extends Controller
     /**
      * @Route("/profile/deleteuser",name="deleteuser")
      */
-    public function deleteUser(Request $request, TokenStorageInterface $tokenStorage)
+    public function deleteUser(Request $request, TokenStorageInterface $tokenStorage)//TokenStorage works to remove de user loged
     {
             $deleted=0;
            //this user
            $user=$this->getUser();
+           //You cant delete admin user
+           if($user->getRole() != "ROLE_ADMIN"){
            //In case the user is a Team owner, will find another member of the team to pass the owner role.
            if($user->getTeamRole()=="Team_Owner"){
                $flag=0;
@@ -176,7 +178,7 @@ class UserController extends Controller
                 $entityManager->flush(); 
            }
             
-            
+    }
             return $this->redirectToRoute('homeaction');
          
     }

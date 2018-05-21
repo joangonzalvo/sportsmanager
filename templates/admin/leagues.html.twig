@@ -1,1 +1,39 @@
-{# empty Twig template #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if app.user %}
+        {% if app.user.role == "ROLE_ADMIN" %}
+         <div class="admintable">  
+            <div class="admindata">
+                  <div class="admintitle"><h2>Admin panel</h2></div>
+                <div class="admininfo"><a href="/adminpanel/users">Show users</a></div>
+                <div class="admininfo"><a href="/adminpanel/teams">Show teams</a></div>
+                <div class="admininfo"><a href="/adminpanel/leagues">Show leagues</a></div>
+              </div>
+          <table>
+            <thead>
+              <tr>
+                <th>League name</th>
+                <th>Type</th>
+                <th>Date Start</th>
+                <th>Action edit</th>
+                <th>Action delete</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for league in leagues %}
+                <tr>
+                <td>{{league.name}}</td>
+                <td>{{league.type}}</td>
+                <td>{{league.date_start|date('d-m-Y')}}</td>
+                <td><a href="/adminpanel/{{league.id}}/editleague">Edit</a></td>
+                <td><a href="/adminpanel/{{league.id}}/deleteleague">Delete</a></td>
+              </tr>
+            {%endfor%}
+            </tbody>
+          </table>
+         </div>
+    {% endif %}
+    
+    {% endif %}
+{% endblock %}
