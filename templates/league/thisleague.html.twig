@@ -18,7 +18,11 @@
         {%endif%}
         {%if actualLeague.type == "basketball"%}
             {%set mytype=1%}
-            <img class="thislogo" src="{{ asset('assets/images/basketball.png') }}">
+            <img class="thislogo" src="{{ asset('assets/images/basket.png') }}">
+        {%endif%}
+        {%if actualLeague.type == "basket"%}
+            {%set mytype=1%}
+            <img class="thislogo" src="{{ asset('assets/images/basket.png') }}">
         {%endif%}
         {%if actualLeague.type == "esports"%}
             {%set mytype=1%}

@@ -7,8 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Form\RegisterType;
-use App\Entity\Team;
 use App\Form\TeamAdminType;
+use App\Form\LeagueType;
 
 class AdminController extends Controller
 {
@@ -182,30 +182,16 @@ class AdminController extends Controller
         if($user->getRole()=="ROLE_ADMIN"){
            $repository = $this->getDoctrine()->getRepository('App:Team');
            $thisteam = $repository->findOneBy(['id' => $thisid]);
-            $team = new Team();
+
             //creating the form
-            $form = $this->createForm(TeamAdminType::class, $team);
+            $form = $this->createForm(TeamAdminType::class, $thisteam);
             $form->handleRequest($request);
             
             if ($form->isSubmitted() && $form->isValid()) {
-           $team=$form->getData();
-           //LOGO
-            //upload file
-            $file=$team->getLogo();
-            $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
-            // moves the file to the directory where brochures are stored
-            $file->move(
-                    $this->getParameter('pictures_directory'),
-                    $fileName
-            );
-            $team->setLogo($fileName);
-            //Update this team:
-            $thisteam->setTeamname($team->getTeamname());
-            $thisteam->setLogo($team->getLogo());
-            
            $em = $this->getDoctrine()->getManager();
            $em->persist($thisteam);
            $em->flush();
+           return $this->redirectToRoute('adminteams');
             }
             return $this->render('admin/editteam.html.twig', array(
                     'form' => $form->createView(),
@@ -253,6 +239,35 @@ class AdminController extends Controller
             return $this->adminTeams();
          
     }//END DELETE USER
+     /**
+     * @Route("/adminpanel/{thisid}/editleague",name="admineditleague")
+     */
+    public function editLeague(Request $request, $thisid)
+    {
+        $user=$this->getUser();
+           if($user->getRole()=="ROLE_ADMIN"){
+        $leagues = $this->getDoctrine()->getRepository('App:League')->findAll();
+        $repository = $this->getDoctrine()->getRepository('App:League');
+        $thisleague = $repository->findOneBy(['id' => $thisid]);
+        
+        $form = $this->createForm(LeagueType::class, $thisleague);
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+           $em = $this->getDoctrine()->getManager();
+           $em->persist($thisleague);
+           $em->flush();
+           
+           return $this->redirectToRoute('adminleagues');
+       }
+       //rendering form
+        return $this->render('admin/editleague.html.twig', array(
+            'form' => $form->createView(),
+            'leagues' => $leagues
+        ));
+           }
+        
+    }//END EDIT TEAM
     
     
 }//ENDCONTROLLER

@@ -6,7 +6,6 @@ namespace App\Form;
    use Symfony\Component\Form\FormBuilderInterface;
    use Symfony\Component\Form\Extension\Core\Type\TextType;
    use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-   use Symfony\Component\Form\Extension\Core\Type\FileType;
    use Symfony\Component\Form\Extension\Core\Type\SubmitType;
    use Symfony\Component\OptionsResolver\OptionsResolver;
    
@@ -20,10 +19,6 @@ class TeamAdminType extends AbstractType{
                             'class'=>'form-teamname form-control'
                         ]
                     ])
-                    ->add('logo',FileType::class,[
-                    	'required'=>true,
-                    	'label'=>'Your team logo (PNG,JPEG)'
-                	])
                     ->add('teamkey', TextType::class,[
                         'label'=>'Team key',
                         'required'=>'required',
