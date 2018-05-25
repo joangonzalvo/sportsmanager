@@ -206,7 +206,6 @@ class AdminController extends Controller
      */
     public function deleteTeam(Request $request, $thisid)
     {
-           $deleted=0;
            //this user
            $user=$this->getUser();
            if($user->getRole()=="ROLE_ADMIN"){
@@ -238,7 +237,7 @@ class AdminController extends Controller
            }
             return $this->adminTeams();
          
-    }//END DELETE USER
+    }//END DELETE TEAM
      /**
      * @Route("/adminpanel/{thisid}/editleague",name="admineditleague")
      */
@@ -267,7 +266,34 @@ class AdminController extends Controller
         ));
            }
         
-    }//END EDIT TEAM
+    }//END EDIT LEAGUE
+     /**
+     * @Route("/adminpanel/{thisid}/deleteleague",name="admindeleteleague")
+     */
+    public function deleteLeague(Request $request, $thisid)
+    {
+           //this user
+           $user=$this->getUser();
+           if($user->getRole()=="ROLE_ADMIN"){
+               $repository = $this->getDoctrine()->getRepository('App:League');
+               $thisleague = $repository->findOneBy(['id' => $thisid]);
+
+               $cs = $this->getDoctrine()->getRepository('App:Classification')->findAll();
+               foreach($cs as $c){
+                            if($c->getLeague()==$thisleague){
+                                $entityManager = $this->getDoctrine()->getManager();
+                                $entityManager->remove($c);
+                                $entityManager->flush();
+                            }
+                        }
+                $entityManager3 = $this->getDoctrine()->getManager();
+                $entityManager3->remove($thisleague);
+                $entityManager3->flush();
+               
+           }
+            return $this->adminLeagues();
+         
+    }//END DELETE LEAGUE
     
     
 }//ENDCONTROLLER
