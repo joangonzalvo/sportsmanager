@@ -16,7 +16,7 @@
                     <button type="submit" class="btn btn-success">Join team</button>
                 </div>
             </form>
-            <form action="{{path("createteam")}}">
+            <form action="{{path("payment")}}">
                 <div class="teamnew">
                     <h2>Create a new team!</h2>
                     <p>Make a new team, lead it to the leagues you wish to participate and manage it at your way.</p>
@@ -31,7 +31,7 @@
                 {% if team == app.user.team_id %}
                     <div class="teamdata">
                         <div class="teamdatatitle"><h2>{{ team.teamname }}</h2></div>
-                        <div class="teamdivlogo"><p><img class="teamlogo" src="{{ asset('uploads/pictures/' ~ team.logo) }}"></p></div>
+                        <div class="teamdivlogo"><p><img class="teamlogo" src="{{ asset('uploads/pictures/' ~ team.logo) }}" alt="Team logo"></p></div>
                         <div class="teamdatatitle"><h2>Team info</h2></div>
                         <div class="teaminfo">
                             <h3>Team name: <i>{{ team.teamname }}</i></h3>
@@ -126,7 +126,7 @@
                         </div> 
                         </div> 
                         <div class="images"> 
-                        <img src="{{ asset('assets/images/image4.jpg') }}"> 
+                        <img src="{{ asset('assets/images/image4.jpg') }}" alt="Register now!"> 
                     </div> 
                 </div>
 
@@ -139,7 +139,7 @@
                         </div> 
                         </div> 
                         <div class="images"> 
-                        <img src="{{ asset('assets/images/image3.jpg') }}"> 
+                        <img src="{{ asset('assets/images/image3.jpg') }}" alt="Join a team or create one!"> 
                     </div> 
                 </div> 
 
@@ -152,7 +152,7 @@
                         </div> 
                         </div> 
                         <div class="images"> 
-                        <img src="{{ asset('assets/images/image2.jpg') }}"> 
+                        <img src="{{ asset('assets/images/image2.jpg') }}" alt="Compete, win!"> 
                     </div> 
                 </div> 
 
@@ -165,7 +165,7 @@
                         </div> 
                         </div> 
                         <div class="images"> 
-                        <img src="{{ asset('assets/images/image1.jpg') }}"> 
+                        <img src="{{ asset('assets/images/image1.jpg') }}" alt="Simulator of leagues"> 
                     </div> 
                 </div> 
             </div> 

@@ -82,6 +82,20 @@ class TeamController extends Controller
         ));
         
     }
+        /**
+     * @Route("/payment",name="payment")
+     */
+    public function payteam(){
+        $teams = $this->getDoctrine()->getRepository('App:Team')->findAll();
+        $users = $this->getDoctrine()->getRepository('App:User')->findAll();
+        $leagues = $this->getDoctrine()->getRepository('App:League')->findAll();
+        
+        return $this->render('team/payment.html.twig',[
+            'teams' => $teams,
+            'users' => $users,
+            'leagues' => $leagues
+            ]);
+    }
     /**
     * @return string
     */
