@@ -114,7 +114,7 @@
             {%endfor%}
         {%endif%}
     {%else%}
-        <!-- Slider for not loged users -->
+        <!-- Slider for not loged users (OLD SLIDER, CHANGED FOR NEW (THIS DONT WORK IN CHROME DEVICES)
         <div id="slider"> 
             <div class="slides">
                 <div class="slider">
@@ -170,5 +170,75 @@
                 </div> 
             </div> 
         </div>
+                    -->
+         <div id="slider-content">
+         <div id="content1">
+            <div id="envoltorio">
+               <div id="desc1">
+                  <p id="parrafo1">Simulate leagues and tournaments with our app
+                  </p>
+                  <p id="parrafo2">Join a team now or create a new one to participate</p>
+                  <p id="parrafo3">Register in order to acces all the content of the app!</p>
+               </div>
+               <div id="menu-slider">
+                  <img src="{{ asset('assets/images/completo.png') }}" id="prim">
+                  <img src="{{ asset('assets/images/incompleto.png') }}" id="segun">
+                  <img src="{{ asset('assets/images/incompleto.png') }}" id="terc">
+               </div>
+            </div>
+         </div>
+      </div>
     {% endif %}  
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+    <script>
+         $("document").ready(function(){
+
+         /*SLIDER*/
+         $("#segun").click(function(){             
+             $("#parrafo1").css("display","none");
+             $("#parrafo3").css("display","none");
+             $("#parrafo2").css("display","flex");
+             
+             $("#content1").css("background", "url({{ asset('assets/images/image2.jpg') }})");
+             $("#content1").css("background-repeat", "no-repeat");
+                 $("#content1").css("background-size", "cover");
+                 $("#content1").css("background-position", "center");
+             
+             $("#prim").attr("src","{{ asset('assets/images/incompleto.png') }}");
+             $("#terc").attr("src","{{ asset('assets/images/incompleto.png') }}");
+             $("#segun").attr("src","{{ asset('assets/images/completo.png') }}");
+           });
+         $("#terc").click(function(){
+         
+             $("#parrafo2").css("display","none");
+             $("#parrafo1").css("display","none");
+             $("#parrafo3").css("display","flex");
+         
+             $("#content1").css("background", "url({{ asset('assets/images/image3.jpg') }})");
+             $("#content1").css("background-repeat", "no-repeat");
+                 $("#content1").css("background-size", "cover");
+                 $("#content1").css("background-position", "center");
+         
+             $("#prim").attr("src","{{ asset('assets/images/incompleto.png') }}");
+             $("#segun").attr("src","{{ asset('assets/images/incompleto.png') }}");
+             $("#terc").attr("src","{{ asset('assets/images/completo.png') }}");
+         });
+         $("#prim").click(function(){
+        
+                 $("#parrafo3").css("display","none");
+                 $("#parrafo1").css("display","flex");
+                 $("#parrafo2").css("display","none");
+                 $("#content1").css("background", "url({{ asset('assets/images/image1.jpg') }})");
+                 $("#content1").css("background-repeat", "no-repeat");
+                 $("#content1").css("background-size", "cover");
+                 $("#content1").css("background-position", "center");
+                 $("#terc").attr("src","{{ asset('assets/images/incompleto.png') }}");
+                 $("#segun").attr("src","{{ asset('assets/images/incompleto.png') }}");
+                 $("#prim").attr("src","{{ asset('assets/images/completo.png') }}");
+             
+         });
+         });//End js
+    </script>
 {% endblock %}

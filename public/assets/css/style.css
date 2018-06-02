@@ -782,3 +782,71 @@ text-align: center;
             transform: rotateY(360deg);
   }
 }
+/*-----------------------------------------------------------------------------SLIDER2.0*/
+#slider-content{
+    height: 400px;
+    width: 100%;
+}
+#envoltorio{
+    display: block;
+}
+#content1{
+    background:url(../images/image1.jpg);
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-position:center;
+    display: flex;
+    justify-content: center;
+    transition: all .5s;
+ 
+}
+#content1 #desc1{
+    background-color: rgba(255, 0, 0, 0.86);
+    color: white;
+    height: 125px;
+    width: 250px;
+    text-align:center;
+    word-wrap: break-word;/*Mantenir inside del div*/
+    margin-top: 120px;
+    border-radius: 4px;
+    transition: all .5s;
+
+    
+}
+#content1 #desc1 p{
+    margin-left: 2px;
+    margin-right: 2px;
+    font-size: 28px;
+}
+#content1 #desc1 img{
+    width: 90px;
+    height: 90px;
+    margin-top: 20px;
+    
+}
+#parrafo2, #parrafo3{
+    display: none;
+}
+
+/*menu*/
+#menu-slider{
+    width:20px;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-left: 105px;
+}
+#menu-slider img{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+#menu-slider #prim{
+    margin-right: 10px;
+}
+#menu-slider #terc{
+    margin-left: 10px;
+}
